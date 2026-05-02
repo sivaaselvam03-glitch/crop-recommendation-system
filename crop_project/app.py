@@ -621,17 +621,17 @@ if predict_btn:
             <div class="p-crop">{best['crop'].capitalize()}</div>
             <div class="p-amount">₹{best['estimated_revenue']:,.0f}</div>
             <div class="p-detail">
-                ₹{best['price_per_tonne']:,} / tonne &nbsp;×&nbsp; {best['yield_per_hectare']} t/ha yield
+                ₹{best['price_per_kg']:,} / kg &nbsp;×&nbsp; {best['yield_per_hectare']:,} kg/ha yield
             </div>
         </div>
         """, unsafe_allow_html=True)
  
         profit_df = pd.DataFrame(result["profitability"][1:])
-        cols = [c for c in ["crop", "price_per_tonne", "yield_per_hectare", "estimated_revenue"]
+        cols = [c for c in ["crop", "price_per_kg", "yield_per_hectare", "estimated_revenue"]
                 if c in profit_df.columns]
         profit_df = profit_df[cols]
-        profit_df.columns = [{"crop": "Crop", "price_per_tonne": "₹/Tonne",
-                               "yield_per_hectare": "Yield t/ha",
+        profit_df.columns = [{"crop": "Crop", "price_per_tonne": "₹/kg",
+                               "yield_per_hectare": "Yield kg/ha",
                                "estimated_revenue": "Est. Revenue ₹"}.get(c, c) for c in cols]
         profit_df["Crop"] = profit_df["Crop"].str.capitalize()
         profit_df.index = ["🥈 2nd", "🥉 3rd"]
