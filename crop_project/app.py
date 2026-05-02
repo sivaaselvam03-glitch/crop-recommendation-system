@@ -8,7 +8,7 @@ Core ML logic is UNCHANGED.
  
 Run with:  streamlit run app.py
 """
-import setup 
+ 
 import streamlit as st
 import pandas as pd
 import os
@@ -469,11 +469,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
  
  
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-if not os.path.exists(os.path.join("model", "crop_model.pkl")):
+MODEL_PATH = os.path.join(BASE_DIR, "model", "crop_model.pkl")
+
+if not os.path.exists(MODEL_PATH):
+    import setup  # trains and saves the model
+
+if not os.path.exists(MODEL_PATH):
     st.markdown("""
     <div class="err3d">
-        ⚠️ Model file not found. Run <code>python train.py</code> first, then restart.
+        ⚠️ Model training failed. Ensure
+        <code>data/Crop_recommendation.csv</code> exists in your repo.
     </div>
     """, unsafe_allow_html=True)
     st.stop()
