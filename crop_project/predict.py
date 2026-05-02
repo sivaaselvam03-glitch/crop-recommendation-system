@@ -69,8 +69,13 @@ CROP_YIELD = {
 }
 
 
-def load_model(model_dir="model"):
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def load_model(model_dir=None):
     """Load the trained model and label encoder from disk."""
+    if model_dir is None:
+        model_dir = os.path.join(BASE_DIR, "model")
+    
     model_path   = os.path.join(model_dir, "crop_model.pkl")
     encoder_path = os.path.join(model_dir, "label_encoder.pkl")
 

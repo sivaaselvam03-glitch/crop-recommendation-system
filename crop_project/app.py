@@ -469,7 +469,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
  
  
-# ── MODEL CHECK ────────────────────────────────────────────────────────────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if not os.path.exists(os.path.join("model", "crop_model.pkl")):
     st.markdown("""
     <div class="err3d">
