@@ -171,7 +171,7 @@ def estimate_profitability(top_3_crops):
         })
 
     # Sort by revenue descending
-    results.sort(key=lambda x: -x["estimated_revenue"])
+    results.sort(key=lambda x: -x["confidence_pct"])
     return results
 
 
