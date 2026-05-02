@@ -93,7 +93,7 @@ def load_model(model_dir=None):
     return model, label_encoder
 
 
-def predict_crop(N, P, K, temperature, humidity, ph, rainfall, model_dir="model"):
+def predict_crop(N, P, K, temperature, humidity, ph, rainfall, model_dir="None"):
     """
     Predict the best crop for given soil & weather conditions.
 
