@@ -473,18 +473,17 @@ st.markdown("""
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model", "crop_model.pkl")
 
+# FIXED
 if not os.path.exists(MODEL_PATH):
-    import setup  # trains and saves the model
-
-if not os.path.exists(MODEL_PATH):
-    st.markdown("""
-    <div class="err3d">
-        ⚠️ Model training failed. Ensure
-        <code>data/Crop_recommendation.csv</code> exists in your repo.
-    </div>
-    """, unsafe_allow_html=True)
-    st.stop()
- 
+    import subprocess, sys
+    st.info("⚙️ Model not found. Training now — please wait ~30 seconds...")
+    result = subprocess.run([sys.executable, os.path.join(BASE_DIR, "train.py")], 
+                            capture_output=True, text=True)
+    if result.returncode != 0:
+        st.error(f"Training failed:\n{result.stderr}")
+        st.stop()
+    st.success("✅ Model trained successfully! Reloading...")
+    st.rerun()
  
 # ── MAIN LAYOUT ────────────────────────────────────────────────────────────────
 left_col, right_col = st.columns([2, 1], gap="large")
