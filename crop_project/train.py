@@ -24,6 +24,7 @@ print("  AI-Based Smart Agriculture Crop Recommendation")
 print("  Model Training Script")
 print("=" * 55)
 
+BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join("data", "Crop_recommendation.csv")
 df = pd.read_csv(data_path)
 
@@ -122,6 +123,7 @@ for feat, imp in feat_imp:
 # ─────────────────────────────────────────────
 # STEP 10: Save model and encoder with pickle
 # ─────────────────────────────────────────────
+BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
 model_path   = os.path.join("model", "crop_model.pkl")
 encoder_path = os.path.join("model", "label_encoder.pkl")
 
